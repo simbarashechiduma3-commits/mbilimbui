@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angie ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #ff9a9e, #f6416c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .scene {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      padding: 40px 30px;
+      width: 92%;
+      max-width: 440px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      animation: rise 1.4s ease;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .type {
+      min-height: 90px;
+    }
+
+    .ask {
+      margin-top: 25px;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 14px 26px;
+      font-size: 1.05rem;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      background: #fff;
+      color: #f6416c;
+      font-weight: bold;
+      transition: transform 0.25s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .final {
+      animation: pop 0.8s ease;
+    }
+
+    .spark {
+      position: fixed;
+      bottom: -20px;
+      font-size: 22px;
+      animation: up 7s linear forwards;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(35px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes up {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SCENE 1 -->
+  <div class="scene" id="scene1">
+    <h1>Angie ❤️</h1>
+    <div class="type" id="typing"></div>
+
+    <div class="ask hidden" id="ask">
+      Will you be my Valentine? 💌
+      <br>
+      <button onclick="yes()">Yes, obviously 😌</button>
+    </div>
+  </div>
+
+  <!-- SCENE 2 -->
+  <div class="scene hidden final" id="scene2">
+    <h1>😏❤️</h1>
+    <p>
+      obviously un=bungasoze uyale so since u agreed i guess this will be the best
+      valentines of ur life bby trust me
+    </p>
+    <p>
+      i may not be perfect but i will try on that day
+    </p>
+    <p>
+      love u ❤️
+      <br><br>
+      <strong>from simba 🐾</strong>
+    </p>
+  </div>
+
+  <script>
+    const text = [
+      "It’s after the math lesson.",
+      "Your voice is still stuck in my head.",
+      "Even the hardest equations felt lighter sitting next to you.",
+      "So… from your boyfriend, Bahbah 🫶🏽"
+    ];
+
+    let line = 0;
+    let char = 0;
+    const speed = 40;
+    const box = document.getElementById("typing");
+
+    function typeText() {
+      if (line < text.length) {
+        if (char < text[line].length) {
+          box.innerHTML += text[line].charAt(char);
+          char++;
+          setTimeout(typeText, speed);
+        } else {
+          box.innerHTML += "<br><br>";
+          char = 0;
+          line++;
+          setTimeout(typeText, 400);
+        }
+      } else {
+        document.getElementById("ask").classList.remove("hidden");
+      }
+    }
+
+    typeText();
+
+    function yes() {
+      document.getElementById("scene1").classList.add("hidden");
+      document.getElementById("scene2").classList.remove("hidden");
+      sparks();
+    }
+
+    function sparks() {
+      setInterval(() => {
+        const s = document.createElement("div");
+        s.className = "spark";
+        s.innerHTML = "💖";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.fontSize = Math.random() * 22 + 16 + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 7000);
+      }, 350);
+    }
+  </script>
+
+</body>
+</html>
